@@ -1,0 +1,65 @@
+.image
+{
+    background:  no-repeat url("img/Alaska-1.jpg");
+    
+    height: 700px;
+}
+.titre
+{
+    text-align: center;
+    padding-top: 350px;
+    color: darkorange;
+    font-size: 80px;
+}
+.flex
+{
+    display: flex;
+    align-content: space-around;
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+ul
+{
+    display: flex;
+    
+    
+}
+.main_menu
+{
+    padding-left: 150px;
+}
+
+.main_menu li 
+{
+    padding-right: 30px;
+    padding-top: 15px;
+    list-style-type: none;
+    
+}
+section
+{
+    height: 1500px;
+}
+
+.article
+{
+    
+    text-align: justify;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    
+}
+.article:hover
+{
+    background-color: rgb(229, 214, 214);
+}
+.sepa
+{
+    color: red;
+}
+h2
+{
+    text-align: center;
+    padding-bottom: 50px;
+}
