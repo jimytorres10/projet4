@@ -19,6 +19,8 @@ class Controller
         $commentManager = new CommentManager($db);
         $comment = $commentManager->getListByPostId($id);
         require ('view/postView.php');
+
+        
     }
     
     public function addCom()
@@ -40,6 +42,20 @@ class Controller
         $this->post($_POST['id']);
         
         
+        
+    }
+    
+    public function reportCom($id)
+    {
+        $db = new PDO('mysql:host=localhost;dbname=blogjf;charset=utf8', 'root', 'root');
+        $commentManager = new CommentManager($db);
+        $comment = $commentManager->get($id);
+        $report = $comment->report();
+        $report++;
+        $comment->setReport($report);
+        $commentManager->update($comment);
+        
+        $this->post($comment->postId());
         
     }
 }
