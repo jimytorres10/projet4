@@ -7,6 +7,11 @@ class Blog
     private $_author;
     private $_content;
     private $_datePost;
+    private $_jour;
+    private $_mois;
+    private $_annee;
+    private $_heure;
+    private $_minute;
     
     
     
@@ -15,8 +20,8 @@ class Blog
         
     }
     public function hydrate(array $data)
-        
-    {   
+    
+    {
         
         foreach ($data as $key => $value)
         {
@@ -48,6 +53,26 @@ class Blog
     {
         return $this->_datePost;
     }
+    public function jour()
+    {
+        return $this->_jour;
+    }
+    public function mois()
+    {
+        return $this->_mois;
+    }
+    public function annee()
+    {
+        return $this->_annee;
+    }
+    public function heure()
+    {
+        return $this->_heure;
+    }
+    public function minute()
+    {
+        return $this->_minute;
+    }
     
     
     
@@ -73,6 +98,26 @@ class Blog
     public function setDatePost($datePost)
     {
         $this->_datePost = $datePost;
+    }
+    public function setJour($jour)
+    {
+        $this->_jour = $jour;
+    }
+    public function setMois($mois)
+    {
+        $this->_mois = $mois;
+    }
+    public function setAnnee($annee)
+    {
+        $this->_annee = $annee;
+    }
+    public function setMinute($minute)
+    {
+        $this->_minute = $minute;
+    }
+    public function setHeure($heure)
+    {
+        $this->_heure = $heure;
     }
     
     
