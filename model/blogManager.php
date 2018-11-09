@@ -10,7 +10,7 @@ class BlogManager
     
     public function add(Blog $article)
     {
-        $q = $this->_db->prepare('INSERT INTO article(title, content, author, date_post) VALUES(:title, :content, :author, :date_post)');
+        $q = $this->_db->prepare('INSERT INTO article(title, content, author, datePost) VALUES(:title, :content, :author, :date_post)');
 
         $q->bindValue(':title', $article->title());
         $q->bindValue(':content', $article->content());
@@ -33,7 +33,7 @@ class BlogManager
     
     public function get($id)
     {
-        $q = $this->_db->query('select * from article WHERE id ='.$id);
+        $q = $this->_db->query('SELECT id, title, content, author, datePost, DAY(datePost) AS jour, MONTH(datePost) AS mois, YEAR(datePost) AS annee, HOUR(datePost) AS heure, MINUTE(datePost) AS minute, SECOND(datePost) FROM article WHERE id ='.$id);
         $data = $q->fetch(PDO::FETCH_ASSOC);
         $selectArticle = new blog();
         
@@ -50,10 +50,10 @@ class BlogManager
     public function getList()
     {
         $articles = [];
-        $q = $this->_db->query('SELECT * FROM article');
+        $q = $this->_db->query('SELECT id, title, content, author, datePost, DAY(datePost) AS jour, MONTH(datePost) AS mois, YEAR(datePost) AS annee, HOUR(datePost) AS heure, MINUTE(datePost) AS minute, SECOND(datePost) FROM article');
         
         while ($data = $q->fetch(PDO::FETCH_ASSOC))
-        {   
+        {
             
             $article =  new Blog();
             $article->hydrate($data);
@@ -62,9 +62,10 @@ class BlogManager
             
         }
         
-     return $articles;
+        return $articles;
     }
-    
+        
+     
     public function update(Blog $article)
     {
         $q = $this->_db->prepare('UPDATE article SET title = :title, content = :content, author = :author WHERE id = :id');
