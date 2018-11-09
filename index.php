@@ -35,6 +35,17 @@ try
                 throw new Exception('id non défini');
             }
         }
+        if ($_GET['action'] == 'reportCom')
+        {
+            if (isset($_GET['id']) && $_GET['id'] > 0 )
+            {
+                $report = new Controller();
+                $report->reportCom($_GET['id']);
+            }else{
+                throw new Exception('id non défini');
+            }
+            
+        }
     }
     else{
         $blogArticles = new Controller();
