@@ -22,11 +22,11 @@ class CommentManager
         $q->execute() ;
     }
     
-    public function delete(Comment $com)
+    public function delete($com)
     {
         $q = $this->_db->prepare('DELETE FROM comment WHERE id = :id');
         
-        $q->bindValue(':id', $com->id());
+        $q->bindValue(':id', $com);
         
         $q->execute();
         
@@ -67,7 +67,7 @@ class CommentManager
     public function getListByPostId($id)
     {
         $coms = [];
-        $q = $this->_db->query('SELECT id, postId,author,contentCom, datePostCom, report, DAY(datePostCom) AS jour, MONTH(datePostCom) AS mois, YEAR(datePostCom) AS annee, HOUR(datePostCom) AS heure, MINUTE(datePostCom) AS minute FROM comment WHERE postId ='.$id);
+        $q = $this->_db->query('SELECT id, postId,author,contentCom, datePostCom, report, DAY(datePostCom) AS jour, MONTH(datePostCom) AS mois, YEAR(datePostCom) AS annee, HOUR(datePostCom) AS heure, MINUTE(datePostCom) AS minute FROM comment  WHERE postId = '.$id.' ORDER BY datePostCom DESC');
         while ($data = $q->fetch(PDO::FETCH_ASSOC))
         {
             
@@ -83,17 +83,26 @@ class CommentManager
     
     public function update(Comment $com)
     {
-        $q = $this->_db->prepare('UPDATE comment SET post = :post, author = :author, title = :title WHERE id = :id');
+        $q = $this->_db->prepare('UPDATE comment SET contentCom = :contentCom, author = :author, report = :report WHERE id = :id');
         
-        $q->bindValue(':text', $com->text());
+        $q->bindValue(':contentCom', $com->contentCom());
         $q->bindValue(':author', $com->author());
-        $q->bindValue(':title', $com->title());
+        $q->bindValue(':report', $com->report());
+ 
         $q->bindValue(':id', $com->id());
         
         
         $q->execute();
     }
-    
+    public function save(blog $article)
+    {
+        if (is_null($article->id()))
+        {
+            $this->add($article);
+        }else{
+            $this->update($article);
+        }
+    }
     public function setDb(PDO $db)
     {
         $this->_db = $db;
