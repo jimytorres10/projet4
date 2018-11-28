@@ -7,9 +7,13 @@
 .titre
 {
     text-align: center;
-    padding-top: 350px;
-    color: darkorange;
+    padding-top: 275px;
+    color: #eeefe4;
     font-size: 80px;
+    font-family: 'Roboto';
+}
+.mainTitle{
+	font-family: 'Roboto';
 }
 .flex
 {
@@ -47,17 +51,14 @@ ul
     text-align: justify;
     margin-bottom: 50px;
     border-radius: 10px;
-    
+    background-color: rgb(243, 243, 243);
     
 }
 .article:hover
 {
-    background-color: rgb(229, 214, 214);
+    
 }
-.sepa
-{
-    color: red;
-}
+
 h2
 {
     text-align: center;
@@ -68,8 +69,28 @@ h2
 	border:solid 1px black;
 	border-radius: 10px 10px 10px 10px;
 	margin-bottom: 30px;
+	
 }
 .comText
 {
 	margin-left:50px;
+	
+	overflow:auto;
+	word-wrap:break-word;
+}
+
+.aboutStyle{
+    text-align: center;
+}
+
+.aboutStyle div{
+    margin-bottom: 15px;
+}
+.socialLink{
+	text-align:center;
+	font-size: 50px;
+}
+.socialLinkTitle{
+	font-size:30px;
+	
 }
