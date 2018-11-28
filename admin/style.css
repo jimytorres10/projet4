@@ -1,0 +1,21 @@
+td{
+	
+	overflow:auto;
+	border: solid 1px black;
+	
+}
+.header{
+	background: no-repeat url("../utilitaire/img/alaska3.png");
+	height: 300px; 
+}
+.title{
+	color: white;
+}
+.smallCol{
+	width:150px;
+	text-align:center;
+	
+}
+.tallCol{
+	width:500px;
+}
