@@ -6,26 +6,29 @@ class BlogManager
     public function __construct($db)
     {
         $this->setDb($db);
+        
     }
     
     public function add(Blog $article)
     {
         $q = $this->_db->prepare('INSERT INTO article(title, content, author, datePost) VALUES(:title, :content, :author, :date_post)');
-
+        
         $q->bindValue(':title', $article->title());
         $q->bindValue(':content', $article->content());
         $q->bindValue(':author', $article->author());
-        $q->bindValue(':date_post', now());
+        $q->bindValue(':date_post', $article->datePost());
         
-
+        
+        
         $q->execute();
+        
     }
     
-    public function delete(Blog $article)
+    public function delete($idArticle)
     {
         $q = $this->_db->prepare('DELETE FROM article WHERE id = :id');
         
-        $q->bindValue(':id', $article->id());
+        $q->bindValue(':id', $idArticle);
         
         $q->execute();
         
@@ -79,9 +82,19 @@ class BlogManager
         $q->execute();
     }
     
+    
     public function setDb(PDO $db)
     {
         $this->_db = $db;
+    }
+    public function save(blog $article)
+    {
+        if (is_null($article->id()))
+        {
+            $this->add($article);
+        }else{
+            $this->update($article);
+        }
     }
     
 }
