@@ -1,10 +1,12 @@
 <?php
+session_start();
 require ('controller/controller.php');
-require ('utilitaire/config.php');
 
-spl_autoload_register(function ($class_name) {
-    include 'model/'.$class_name . '.php';
-});
+
+require ('model/BlogManager.php');
+require ('model/Blog.php');
+require ('model/Comment.php');
+require ('model/CommentManager.php');
 try
 {
     if (isset($_GET['action']))
@@ -41,10 +43,29 @@ try
             {
                 $report = new Controller();
                 $report->reportCom($_GET['id']);
+                
+                
+                
             }else{
                 throw new Exception('id non défini');
             }
             
+        }
+        if ($_GET['action'] == 'about')
+        {
+            $about =new Controller();
+            $about->aboutPage();
+        }
+        if ($_GET['action'] == 'contact')
+        {
+            $contact =new Controller();
+            $contact->contactPage();
+        }
+        if ($_GET['action'] == 'sendMail')
+        {
+            $sendMessage =new Controller();
+            $sendMessage->sendMail($_POST['mail'], $_POST['message']);
+            $msg = 'ff';
         }
     }
     else{
