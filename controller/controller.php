@@ -6,7 +6,7 @@ class Controller
     
     public function __construct()
     {
-        $this->dbConnect = new PDO('mysql:host=db762095726.hosting-data.io;dbname=db762095726;charset=utf8', 'dbo762095726', 'A1t@101010');
+        $this->dbConnect = new PDO('mysql:host=localhost;dbname=blogjf;charset=utf8', 'root', 'root');
     }
     public function listpost()
     {   
@@ -31,18 +31,21 @@ class Controller
     {
         
         
-        $com = new Comment();
         
+        if (preg_match("#\S[a-z]{3}\S#", $_POST['pseudo']))
+        {
+        $com = new Comment();
         $com->setAuthor(htmlspecialchars($_POST['pseudo']));
         $com->setPostId($_POST['id']);
         $com->setContentCom(htmlspecialchars($_POST['message']));
         date_default_timezone_set('Europe/Paris');
         $com->setDatePostCom(date('Y-m-d H:i:s'));
         $com->setReport(0);
-        
         $commentManager = new CommentManager($this->dbConnect);
         $commentManager->add($com);
         
+        
+        }
         $this->post($_POST['id']);
         
         
