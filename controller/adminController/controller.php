@@ -4,7 +4,7 @@ class Controller
 {
     public function __construct()
     {
-        $this->dbConnect = new PDO('mysql:host=db762095726.hosting-data.io;dbname=db762095726;charset=utf8', 'dbo762095726', 'A1t@101010');
+        $this->dbConnect = new PDO('mysql:host=localhost;dbname=blogjf;charset=utf8', 'root', 'root');
     }
     public function addCommentAndArticle()
     {   
@@ -27,6 +27,12 @@ class Controller
     {
         $blogManager = new BlogManager($this->dbConnect);
         $blogManager->delete($id);
+        $commentManager = new CommentManager($this->dbConnect);
+        $comDelete = $commentManager->getListByPostId($id);
+        foreach ($comDelete as $deleteCom)
+        {
+            $commentManager->delete($deleteCom->id());
+        }
         $this->addCommentAndArticle();
         
     }
